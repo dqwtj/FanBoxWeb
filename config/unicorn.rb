@@ -10,7 +10,7 @@
 
 # Use at least one worker per core if you're on a dedicated server,
 # more will usually help for _short_ waits on databases/caches.
-worker_processes 6
+worker_processes 4
 
 # Since Unicorn is never exposed to outside clients, it does not need to
 # run on the standard HTTP port (80), there is no reason to start Unicorn
@@ -21,7 +21,7 @@ worker_processes 6
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-app_path="/var/rails/AnnaPatio"
+app_path="/var/rails/FanBoxWeb"
 working_directory app_path # available in 0.94.0+
 
 # listen on both a Unix domain socket and a TCP port,
