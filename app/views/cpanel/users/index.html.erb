@@ -1,0 +1,30 @@
+<div class="container">
+<fieldset class="col-md-8 col-md-offset-2">
+<table class="table table-hover">
+  <tr>
+    <td>ID</td>
+    <td>昵称</td>
+    <td>手机</td>
+    <td>性别</td>
+    <td>卡片数</td>
+    <td>密匙</td>
+    <td>操作</td>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+  	<td><%= user.id %></td>
+	<td><%= user.name %></td>
+	<td><%= user.mobile %></td>
+	<td><%= user.gender %></td>
+	<td><%= link_to user.cards_count, cpanel_cards_path(user_id: user.id) %></td>
+	<td><%= user.private_token %></td>
+	<td>
+	 <%= link_to "编辑", edit_cpanel_user_path(user), :title => "编辑" %>
+	</td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @users %>
+</fieldset>
+</div>

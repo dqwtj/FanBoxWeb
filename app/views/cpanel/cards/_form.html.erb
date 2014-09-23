@@ -1,0 +1,81 @@
+<div class="container">
+	<%= simple_form_for([:cpanel, @card]) do |f| %>
+	<fieldset class="col-md-6 col-md-offset-3">
+		<%= f.error_notification %>
+		<%= f.input :title, :label => "标题" %>
+		<div class="row">
+			<div class="col-md-9">
+				<span id="upload_photo_button" class="btn btn-success fileinput-button" style="width:130px"> <i class="glyphicon glyphicon-plus"></i> <span id="upload_photo_label">赶紧上传图片</span> <!-- The file input field used as target for the file upload widget -->
+					<input id="photoupload" type="file" name="file">
+				</span>
+				<hr/>
+				<div class="progress progress-striped active" style="height:34px">
+					<div id="pb2" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<img id="cardpic" src="<%= @card.base_url %>" alt="预览小图" class="img-thumbnail avatar" style="display: none">
+			</div>
+		</div>
+		<%= f.input :base_url, :readonly => true, :label => "文件链接"%>
+		<%= f.input :image_width, :readonly => true, :label => "图片宽度"%>
+		<%= f.input :image_height, :readonly => true, :label => "图片高度"%>
+		<%= f.input :image_type, :readonly => true, :label => "图片类型"%>
+		<%= f.input :topic, :label => "事件" %>
+		<%= f.input :event, :label => "活动" %>
+		<%= f.input :source, :label => "来源" %>
+		<div class="actions">
+			<%= f.submit '保存', :class => "btn btn-primary btn-lg btn-block", :disable_with => '保存中' %>
+		</div>
+	</fieldset>
+	<% end %>
+</div>
+
+<script>
+	/*jslint unparam: true */
+	/*global window, $ */
+	
+	$(function() {'use strict';
+		// Change this to the location of your server-side upload handler:
+		var photo_url = "http://v0.api.upyun.com/fanhe-photo/";
+		$('#photoupload').fileupload({
+			url : photo_url,
+			dataType : 'json',
+			formData : {
+				'policy' : '<%= @policy %>',
+				'signature' : '<%= @signature %>'
+			},
+			method : 'post',
+			done : function(data) {
+				$("#upload_photo_label").text("上传完成");
+				$('[name="commit"]').removeAttr('disabled');
+				$('[name="commit"]').val('保存');
+			},
+			success : function(data) {
+				$("#cardpic").attr("src", 'http://fanhe-photo.b0.upaiyun.com' + data.url + '!small');
+				$("#cardpic").show();
+				$("#card_base_url").val(data.url);
+				$("#card_image_width").val(data["image-width"]);
+				$("#card_image_height").val(data["image-height"]);
+				$("#card_image_type").val(data["image-type"]);
+			},
+			progressall : function(e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				$('#pb2').css('width', progress + '%');
+				$("#upload_photo_label").text("上传中..");
+				$('#photoupload').attr('disabled', 'true');
+				$('#upload_photo_button').attr('disabled', 'disabled');
+				$('[name="commit"]').attr('disabled', 'disabled');
+				$('[name="commit"]').val('上传文件中...');
+			},
+			
+			change : function (e, data) {
+    			$.each(data.files, function (index, file) {
+        			// alert('Selected file: ' + file.name);
+    			});
+    			alert($('input[type=file]').val())
+			},
+			
+		});
+	}); 
+</script>

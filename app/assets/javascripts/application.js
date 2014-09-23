@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.ui.widget
+//= require jquery.fileupload
+//= require bootstrap/transition
+//= require bootstrap/dropdown
+//= require bootstrap/collapse
 //= require_tree .

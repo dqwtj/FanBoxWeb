@@ -1,0 +1,15 @@
+<div class="container">
+	<%= simple_form_for([:cpanel, @box]) do |f| %>
+	<fieldset class="col-md-6 col-md-offset-3">
+		<%= f.error_notification %>
+		<%= f.input :name, :label => "话题名称" %>
+		<%= f.input :info, :label => "简介" %>
+		<%= f.input :box_type, :label => "话题类型" %>
+		<%= f.input :hit_count, :label => "浏览量" %>
+		<%= %>
+		<div class="actions">
+			<%= f.submit '保存', :class => "btn btn-primary btn-lg btn-block", :disable_with => '保存中' %>
+		</div>
+	</fieldset>
+	<% end %>
+</div>

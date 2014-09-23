@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+$font-family-sans-serif: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; 
+
+// import original bootstrap
+@import "bootstrap-sprockets";
+@import "bootstrap";
