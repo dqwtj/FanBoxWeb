@@ -21,6 +21,7 @@
 	<td><%= user.private_token %></td>
 	<td>
 	 <%= link_to "编辑", edit_cpanel_user_path(user), :title => "编辑" %>
+	 <%= link_to "删除", cpanel_user_path(user), :method => :delete, :data => {:confirm => '确定要删除用户，该操作不可恢复'}, :title => "删除" %>
 	</td>
   </tr>
 <% end %>

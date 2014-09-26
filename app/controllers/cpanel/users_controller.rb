@@ -37,4 +37,12 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     
   end
   
+  def destroy
+    @user = User.find params[:id]
+    
+    @user.destroy
+    redirect_to cpanel_users_path, :notice => @user.name + '删除成功'
+    
+  end
+  
 end
