@@ -6,7 +6,7 @@ class Cpanel::CardsController < Cpanel::ApplicationController
     box = Box.find(params[:box_id]) if params[:box_id]
     idol = Idol.find(params[:idol_id]) if params[:idol_id]
     @cards = Card.order(created_at: :desc).paginate :page => params[:page], :per_page => 20
-    @cards = user.cards.order(created_at: :desc).paginate :page => params[:page], :per_page => 20 if user
+    @cards = user.cards.order(created_at: :desc).includes(:marks, :tags).paginate :page => params[:page], :per_page => 20 if user
     @cards = box.cards.order(created_at: :desc).paginate :page => params[:page], :per_page => 20 if box
     @cards = idol.cards.order(created_at: :desc).paginate :page => params[:page], :per_page => 20 if idol
   end

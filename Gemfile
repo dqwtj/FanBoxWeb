@@ -5,6 +5,7 @@ source 'http://ruby.taobao.org'
 gem 'rails', '4.1.4'
 
 gem 'mysql2'
+gem "lol_dba"
 
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.2.0'
