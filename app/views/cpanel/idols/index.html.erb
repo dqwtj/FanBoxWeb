@@ -15,7 +15,7 @@
   	<td><%= idol.id %></td>
 	<td><%= idol.name %></td>
 	<td><%= idol.fans_count %></td>
-	<td><%= link_to idol.boxes.count, cpanel_boxes_path(idol_id: idol.id) %></td>
+	<td><%= link_to idol.boxes_count, cpanel_boxes_path(idol_id: idol.id) %></td>
 	<td><%= link_to idol.marks_count, cpanel_cards_path(idol_id: idol.id) %></td>
 	<td>
 	 <%= link_to "编辑", edit_cpanel_idol_path(idol), :title => "编辑" %>
