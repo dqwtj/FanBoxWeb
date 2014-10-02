@@ -1,14 +1,14 @@
 class Card < ActiveRecord::Base
   validates :base_url, :presence => true
   belongs_to :user, counter_cache: true
-  has_many :tags
+  has_many :tags, dependent: :destroy
   has_many :boxes, -> { distinct }, through: :tags
   has_and_belongs_to_many :users
-  has_many :marks
+  has_many :marks, dependent: :destroy
   has_many :idols, -> { distinct }, through: :marks
   
   def img_preview_url
-    self.upyun_url+self.base_url+"!preview"
+    self.preview_url ? self.upyun_url+self.preview_url+"!preview" : "#"
   end
   
   def img_standard_url
@@ -42,23 +42,22 @@ class Card < ActiveRecord::Base
       self.source = items[6] if items[7]
       self.title = "数据来源："+self.source if self.source
       if self.topic
-        box_topic = Box.find(name: self.topic)
+        box_topic = idol.boxes.find_by(name: self.topic)
         if !box_topic
-          box_topic = Box.create(name: self.topic, box_type: "topic")
-          box_topic.idols << idol
+          box_topic = idol.boxes.create(name: self.topic, box_type: "topic")
         end
-        self.boxes << box_topic
+        Tag.find_or_create_by(card_id: self.id, box_id: box_topic.id)
       end
       if self.event
-        box_event = Box.find(name: self.event)
+        box_event = idol.boxes.find_by(name: self.event)
         if !box_event
-          box_event = Box.create(name: self.event, box_type: "event")
-          box_event.idols << idol
+          box_event = idol.boxes.create(name: self.event, box_type: "event")
         end
-        self.boxes << box_event
+        Tag.find_or_create_by(card_id: self.id, box_id: box_topic.id)
       end
     end
   end
+
   
   protected
     def upyun_url
