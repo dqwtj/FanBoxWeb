@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :cards, dependent: :nullify
   has_many :subscribes, dependent: :destroy
   has_many :boxes, -> { distinct }, through: :subscribes
-  has_many :fans, dependent: :destroy
+  has_many :fans
   has_many :idols, -> { distinct }, through: :fans
   has_and_belongs_to_many :zans, -> { uniq }, class_name: "Card"
   has_and_belongs_to_many :followers, -> { uniq }, class_name: "User", foreign_key: "followee_id", join_table: "followees_followers", association_foreign_key: "follower_id"
