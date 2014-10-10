@@ -10,5 +10,8 @@ Rails.application.routes.draw do
     resources :cards
   end
   
+  get 'agreement' => 'mobile#agreement'
+  get 'privacy' => 'mobile#privacy'
+  get 'support' => 'mobile#support'
   
 end

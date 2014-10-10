@@ -24,7 +24,7 @@ class Cpanel::CardsController < Cpanel::ApplicationController
   def destroy
     @card = Card.find params[:id]
     
-    @card.destroy
+    @card.update(soft_delete: true)
     redirect_to cpanel_cards_path, :notice => '卡片删除成功'
   end
   
