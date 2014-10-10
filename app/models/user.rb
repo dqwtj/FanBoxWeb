@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   validates :name, :encrypted_password, presence: true
   validates :name, uniqueness: true
-  has_one :box, dependent: :nullify
   has_many :cards, dependent: :nullify
   has_many :subscribes, dependent: :destroy
   has_many :boxes, -> { distinct }, through: :subscribes
