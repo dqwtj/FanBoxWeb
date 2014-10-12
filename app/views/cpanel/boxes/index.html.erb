@@ -4,6 +4,7 @@
   <tr>
     <td>ID</td>
     <td>话题名称</td>
+    <td>偶像</td>
     <td>话题类型</td>
     <td>订阅人数</td>
     <td>卡片数量</td>
@@ -14,7 +15,8 @@
 <% @boxes.each do |box| %>
   <tr>
   	<td><%= box.id %></td>
-	<td><%= box.name %></td>
+	<td style="max-width: 200px"><%= box.name %></td>
+	<td><%= box.idol.name%></td>
 	<td><%= box.box_type %></td>
 	<td><%= box.subscribes_count %></td>
 	<td><%= link_to box.tags_count, cpanel_cards_path(box_id: box.id) %></td>

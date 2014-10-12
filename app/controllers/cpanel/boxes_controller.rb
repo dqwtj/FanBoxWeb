@@ -18,6 +18,16 @@ class Cpanel::BoxesController < Cpanel::ApplicationController
     @box = Box.find params[:id]
   end
   
+  def update
+    @box = Box.find params[:id]
+    
+    if @box.update_attributes(params[:box].permit!)
+      redirect_to(cpanel_users_path, :notice => '话题修改成功')
+    else
+      render :action => "edit"
+    end
+  end
+  
   
   
 end

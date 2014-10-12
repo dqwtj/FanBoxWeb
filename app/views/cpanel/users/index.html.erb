@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <tr>
     <td>ID</td>
+    <td>头像</td>
     <td>昵称</td>
     <td>手机</td>
     <td>性别</td>
@@ -14,6 +15,7 @@
 <% @users.each do |user| %>
   <tr>
   	<td><%= user.id %></td>
+  	<td><%= image_tag user.avatar_url, :style => "width: 30px" %></td>
 	<td><%= user.name %></td>
 	<td><%= user.mobile %></td>
 	<td><%= user.gender %></td>
