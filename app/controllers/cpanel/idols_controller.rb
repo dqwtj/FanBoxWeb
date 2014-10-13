@@ -27,7 +27,13 @@ class Cpanel::IdolsController < Cpanel::ApplicationController
   end
   
   def update
+    @idol = Idol.find params[:id]
     
+    if @idol.update_attributes(params[:idol].permit!)
+      redirect_to(cpanel_idols_path, :notice => '偶像修改成功')
+    else
+      render :action => "edit"
+    end
   end
   
 end
