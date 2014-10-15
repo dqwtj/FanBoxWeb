@@ -10,7 +10,7 @@
         		<p class="text-success">时间活动：<%= card.event %></p>
         		<p class="text-info">来源：<%= card.source %></p>
         		<p class="text-danger">标签：<%= card.tags.map(&:name).join(', ') %></p>
-        		<p><a href="#" class="btn btn-primary" role="button">Button</a> 
+        		<%= link_to "编辑", edit_cpanel_card_path(card), :class => "btn btn-primary"%>
         	    <%= link_to "删除", cpanel_card_path(card), :method => :delete, :data => {:confirm => '确定要删除卡片，该操作不可恢复'}, :class => "btn btn-default" %>
       		</div>
       		</div>

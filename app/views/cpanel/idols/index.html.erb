@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <tr>
     <td>ID</td>
+    <td>头像</td>
     <td>偶像</td>
     <td>粉丝数量</td>
     <td>话题数量</td>
@@ -13,6 +14,7 @@
 <% @idols.each do |idol| %>
   <tr>
   	<td><%= idol.id %></td>
+  	<td><%= image_tag idol.avatar_url, :style => "width: 30px" %></td>
 	<td><%= idol.name %></td>
 	<td><%= idol.fans_count %></td>
 	<td><%= link_to idol.boxes_count, cpanel_boxes_path(idol_id: idol.id) %></td>

@@ -17,8 +17,18 @@ class Cpanel::CardsController < Cpanel::ApplicationController
     @signature = Digest::MD5.hexdigest(@policy+'&'+'ZLxp3SHTJ1R7flhOVQVWL0YGtdw=')
   end
   
-  def create
+  def edit
+    @card = Card.find params[:id]
+  end
+  
+  def update
+    @card = Card.find params[:id]
     
+    if @card.update_attributes(params[:card].permit!)
+      redirect_to(cpanel_cards_path, :notice => '卡片修改成功')
+    else
+      render :action => "edit"
+    end
   end
   
   def destroy
